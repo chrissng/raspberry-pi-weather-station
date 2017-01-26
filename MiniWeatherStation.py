@@ -5,11 +5,9 @@ import sys
 import time
 import datetime
 import commands
+import urllib2
 
 # libraries
-import sys
-import urllib2
-import json
 import gspread
 from oauth2client.client import SignedJwtAssertionCredentials
 from sense_hat import SenseHat
@@ -37,8 +35,8 @@ def login_open_sheet(oauth_key_file, spreadsheet):
 	try:
 		json_key = json.load(open(oauth_key_file))
 		credentials = SignedJwtAssertionCredentials(json_key['client_email'],
-													json_key['private_key'],
-													['https://spreadsheets.google.com/feeds'])
+							    json_key['private_key'],
+							    ['https://spreadsheets.google.com/feeds'])
 		gc = gspread.authorize(credentials)
 		worksheet = gc.open(spreadsheet).sheet1
 		return worksheet
